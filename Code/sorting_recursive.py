@@ -49,14 +49,24 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
 
+    # Split items list into approximately equal halves
     median = len(items) // 2 # Using floor to give us equal halves
-    left_half = items[:median + 1]
+    # Calculating both left and right half 
+    left_half = items[:median + 1] 
     right_half = items[median + 1:]
-    return(merge(bubble_sort(left_half), bubble_sort(right_half)))
+
+    # Conducting iterative sorting algo bubble sort on both halfs ... 
+    # TODO: Sort each half using any other sorting algorithm
+    bubble_sort(left_half)
+    bubble_sort(right_half)
+
+    # Then merging the two sorted halfs using the merge func
+    # TODO: Merge sorted halves into one list in sorted order
+    merged_result = merge(left_half, right_half)
+
+    # Copy result into input list with slice assignment
+    items[:] = merged_result
 
 
 def merge_sort(items):
@@ -68,6 +78,7 @@ def merge_sort(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
+
 
 
 def partition(items, low, high):
