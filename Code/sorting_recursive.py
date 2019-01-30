@@ -10,6 +10,38 @@ def merge(items1, items2):
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
 
+    # Pointers to elements in corresponding item lsts
+    left_counter = 0 
+    right_counter = 0
+    sorted_lst = [] # Lst containing sorted output
+
+    # Iterating over corresponding elements until one index goes out of range
+    while left_counter < len(items1) and right_counter < len(items2):
+
+        # Checking for order in which elements should be outputted to sorted array
+        if items1[left_counter] < items2[right_counter]:
+            sorted_lst.append(items1[left_counter])
+            left_counter += 1
+        elif items1[left_counter] > items2[right_counter]:
+            sorted_lst.append(items2[right_counter])
+            right_counter += 1
+        else:
+            sorted_lst.append(items1[left_counter])
+            sorted_lst.append(items2[right_counter])
+            left_counter += 1
+            right_counter += 1
+
+    # Check which array still has elements remaining, wont execute if lst index is out of range
+    while left_counter < len(items1):
+      sorted_lst.append(items1[left_counter])
+      left_counter += 1
+      
+    while right_counter < len(items2):
+      sorted_lst.append(items2[right_counter])
+      right_counter += 1
+
+    return sorted_lst
+
 
 def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
