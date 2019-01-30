@@ -84,11 +84,15 @@ def merge_sort(items,left=None,right=None,median=None):
         median = len(items) // 2
         left = items[:median]
         right = items[median:]
+
+    if len(items) == 1:
+        return merge(left, right)
     
     left = merge_sort(left)
     right = merge_sort(right)
 
-    return merge(left, right)
+    items[:] = merge(left, right)
+    return items
 
 def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
