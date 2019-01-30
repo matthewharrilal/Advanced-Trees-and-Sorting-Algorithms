@@ -1,5 +1,5 @@
 #!python
-
+from sorting_iterative import bubble_sort
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -56,7 +56,8 @@ def split_sort_merge(items):
     median = len(items) // 2 # Using floor to give us equal halves
     left_half = items[:median + 1]
     right_half = items[median + 1:]
-    
+    return(merge(bubble_sort(left_half), bubble_sort(right_half)))
+
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
