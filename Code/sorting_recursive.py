@@ -69,17 +69,26 @@ def split_sort_merge(items):
     items[:] = merged_result
 
 
-def merge_sort(items):
+def merge_sort(items,left=None,right=None,median=None):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
+    
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
 
+    # What is getting redefined every recursive call our median and left and right the 
+    if left is None and right is None and median is None:
+        median = len(items) // 2
+        left = items[:median]
+        right = items[median:]
+    
+    left = merge_sort(left)
+    right = merge_sort(right)
 
+    return merge(left, right)
 
 def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
