@@ -15,6 +15,18 @@ def bubble_sort(items):
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Repeat until all items are in sorted order
     # TODO: Swap adjacent items that are out of order
+    if len(items) == 0:
+        raise ValueError("Can't give me an empty array!")
+    
+    counter = 0 # Represents our iterator
+
+    while counter < len(items) - 1:
+        if items[counter] > items[counter + 1]:
+            items[counter], items[counter + 1] = items[counter + 1], items[counter]
+            counter = 0 
+        else:
+            counter += 1
+    return items 
 
 
 def selection_sort(items):

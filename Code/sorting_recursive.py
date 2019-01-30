@@ -4,8 +4,8 @@
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: ??? Why and under what conditions? #O(n) due to n being the number of elements in both lsts iterating over each once
+    TODO: Memory usage: ??? Why and under what conditions?""" # o(n) because output grows as input grows
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
@@ -53,6 +53,10 @@ def split_sort_merge(items):
     # TODO: Sort each half using any other sorting algorithm
     # TODO: Merge sorted halves into one list in sorted order
 
+    median = len(items) // 2 # Using floor to give us equal halves
+    left_half = items[:median + 1]
+    right_half = items[median + 1:]
+    
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
