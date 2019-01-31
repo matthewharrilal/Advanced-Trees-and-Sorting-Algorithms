@@ -86,7 +86,7 @@ def merge_sort(items,left=None,right=None,median=None):
         right = items[median:]
 
     if len(items) == 1:
-        return merge(left, right)
+        return merge(left, right) # Have to return the value up the stack trace
     
     left = merge_sort(left)
     right = merge_sort(right)
@@ -106,6 +106,21 @@ def partition(items, low, high):
     # TODO: Move items less than pivot into front of range [low...p-1]
     # TODO: Move items greater than pivot into back of range [p+1...high]
     # TODO: Move pivot item into final position [p] and return index p
+
+    pivot = items[0] # Starting element so don't have to iterate
+    wall = -1
+    for index in range(low, high):
+        print(items[pivot])
+
+        if items[index] < pivot: # If current element is smaller than the element at the pivot
+            wall += 1
+            items[wall], items[index] = items[index], items[wall]
+    
+    # EXPENSIVE A$$ OPERATIONS
+    items.remove(pivot) 
+    items.insert(wall + 1, pivot)
+
+    return items
 
 
 def quick_sort(items, low=None, high=None):
