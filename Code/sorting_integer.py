@@ -44,3 +44,12 @@ def bucket_sort(numbers, num_buckets=10):
     # TODO: Sort each bucket using any sorting algorithm (recursive or another)
     # TODO: Loop over buckets and append each bucket's numbers into output list
     # FIXME: Improve this to mutate input instead of creating new output list
+
+    minimum,maximum = min(number), max(number)
+    buckets = []
+
+    range_num = numbers // num_buckets
+
+    for index in range(0, len(numbers), range_num):
+        buckets.append(numbers[index: range_num + index])
+    return buckets
