@@ -32,8 +32,7 @@ def counting_sort(numbers):
 
   return numbers
     
-
-def bucket_sort(numbers, num_buckets=10):
+def bucket_sort(numbers, num_buckets=5):
     """Sort given numbers by distributing into buckets representing subranges,
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: ??? Why and under what conditions?
@@ -45,11 +44,20 @@ def bucket_sort(numbers, num_buckets=10):
     # TODO: Loop over buckets and append each bucket's numbers into output list
     # FIXME: Improve this to mutate input instead of creating new output list
 
-    minimum,maximum = min(number), max(number)
-    buckets = []
+    # minimum,maximum = min(number), max(number)
+    range_num = len(numbers) // num_buckets
+    buckets = [[] for _ in range(range_num + 1)]
+    # print(buckets[5])
+    
+    for index, number in enumerate(numbers):
+      # Two cases number 15 and number 3
+      print(number)
+      bucket_index, remainder = divmod(number , range_num)
 
-    range_num = numbers // num_buckets
+      if remainder > 0:
+        buckets[bucket_index].append(number)
+      else:
+        buckets[bucket_index - 1].append(number)
+      
 
-    for index in range(0, len(numbers), range_num):
-        buckets.append(numbers[index: range_num + index])
     return buckets
