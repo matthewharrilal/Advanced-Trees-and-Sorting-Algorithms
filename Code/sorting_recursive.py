@@ -135,9 +135,9 @@ def quick_sort(items, low=None, high=None):
        low = 0
        high = len(items) - 1
 
-    if low < high:
+    if low < high: # My guess on how this condition gets broken is as you call quick sort on each half your end keeps getting decremented and you low keeps getting incremented
 
-        pivot = partition(items, low, high)
+        pivot = partition(items, low, high) # Based off the current winow of items we are looking at in the array find the partition
         quick_sort(items, low, pivot - 1)
         quick_sort(items, pivot + 1, high)
 
