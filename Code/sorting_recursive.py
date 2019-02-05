@@ -107,25 +107,15 @@ def partition(items, low, high):
     # TODO: Move items greater than pivot into back of range [p+1...high]
     # TODO: Move pivot item into final position [p] and return index p
 
-    pivot = items[0] 
-    wall = -1
-    # Wall keeps track of where the next smaller element should be placed when found
+    wall = low # Start wall at beginning of sequence since that is where our first partitioned element goes
 
-    # Increment wall after new smaller element is found to show the increase of position when placing the pivot back
     for index in range(low, high):
-        # print(items[pivot])
-
-        if items[index] < pivot: # If current element is smaller than the element at the pivot
-            wall += 1
-            items[wall], items[index] = items[index], items[wall]
+        if items[index] < items[high]: # Need to pivot for static element that varies on lower and upper bound pass in have to pivot against something
+            items[index], items[wall] = items[wall], items[index]
+            wall += 1 # Next partitioned element lands in the next seat
     
-    # EXPENSIVE A$$ OPERATIONS
-    items.remove(pivot) 
-    items.insert(wall + 1, pivot)
-
-    # items[wall + 1], pivot = pivot, items[wall + 1]
-
-    return wall + 1 # Return index of pivot so when quicksorting half ... you have a upper and lower bound
+    # Wall ends where pivot should be placed since is last updated when a lesser element was found
+    return wall
 
 
 def quick_sort(items, low=None, high=None):
@@ -139,16 +129,15 @@ def quick_sort(items, low=None, high=None):
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
 
-   
-    if low is None and high is None:
-        low = 0
-        high = len(items) - 1
+   if low is None and high is None:
+       low = 0
+       high = len(items) - 1
 
-    if len(items) <= 1:
-        return items
+    if low < high:
 
-    pivot = partition(items, low, high)
-    quick_sort(items, low, pivot - 1)
-    quick_sort(items, pivot + 1, high)
+        pivot = partition(items, low, high)
+        quick_sort(items, low, pivot - 1)
+        quick_sort(items, pivot + 1, high)
+    return items
 
 
