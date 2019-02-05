@@ -110,10 +110,12 @@ def partition(items, low, high):
     wall = low # Start wall at beginning of sequence since that is where our first partitioned element goes
 
     for index in range(low, high):
-        if items[index] < items[high]: # Need to pivot for static element that varies on lower and upper bound pass in have to pivot against something
+        if items[index] <= items[high]: # Need to pivot for static element that varies on lower and upper bound pass in have to pivot against something
             items[index], items[wall] = items[wall], items[index]
             wall += 1 # Next partitioned element lands in the next seat
     
+    # Have to put pivot back in place now
+    items[high], items[wall] = items[wall], items[high]
     # Wall ends where pivot should be placed since is last updated when a lesser element was found
     return wall
 
@@ -129,7 +131,7 @@ def quick_sort(items, low=None, high=None):
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
 
-   if low is None and high is None:
+    if low is None and high is None:
        low = 0
        high = len(items) - 1
 
@@ -138,6 +140,5 @@ def quick_sort(items, low=None, high=None):
         pivot = partition(items, low, high)
         quick_sort(items, low, pivot - 1)
         quick_sort(items, pivot + 1, high)
+
     return items
-
-
