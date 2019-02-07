@@ -14,7 +14,7 @@ def counting_sort(numbers):
     minimum, maximum = min(numbers), max(numbers)
     count_array = [0] * ((maximum + 1) - minimum)
     offset = minimum
-    output = [0] * len(numbers)
+    # output = [0] * len(numbers)
 
 
     for index in range(0, len(numbers)):
@@ -30,7 +30,7 @@ def counting_sort(numbers):
     
     
 
-  return numbers
+    return numbers
     
 def bucket_sort(numbers, num_buckets=5):
     """Sort given numbers by distributing into buckets representing subranges,
@@ -48,6 +48,11 @@ def bucket_sort(numbers, num_buckets=5):
     range_num = len(numbers) // num_buckets
     buckets = [[] for _ in range(range_num + 1)]
     # print(buckets[5])
+
+    # Figure out range from minimum to maximum
+
+    # Now the average range of values in that bucket
+    # maximum / num_buckets
     
     for index, number in enumerate(numbers):
       # Two cases number 15 and number 3
@@ -58,6 +63,11 @@ def bucket_sort(numbers, num_buckets=5):
         buckets[bucket_index].append(number)
       else:
         buckets[bucket_index - 1].append(number)
+
+    
+    for bucket in buckets:
+      quick_sort(bucket)
+      output.extend(bucket)
+    return output
       
 
-    return buckets
