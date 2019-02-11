@@ -3,6 +3,9 @@
 import sys
 import time
 
+from trietree import TrieTrieeNode
+from trietree import TrieTree
+
 
 def get_lines(filename='/usr/share/dict/words'):
     """Return a list of strings on separate lines in the given text file with
@@ -21,7 +24,7 @@ def generate_prefixes(vocabulary):
 
 def linear_search(vocabulary):
     for word in vocabulary:
-        
+
 
 def autocomplete_setup(vocabulary, algorithm='linear_search'):
     """Return the main data structure needed to set up autocomplete using the
@@ -30,9 +33,8 @@ def autocomplete_setup(vocabulary, algorithm='linear_search'):
         # Use the given vocabulary list
         return vocabulary
     elif algorithm == 'trie':
-        from trie import Trie
         # Create a trie structure with the vocabulary
-        return Trie(vocabulary)
+        return TrieTree(vocabulary)
 
 
 def autocomplete(prefix, structure, algorithm='linear_search'):
