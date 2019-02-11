@@ -19,6 +19,10 @@ def generate_prefixes(vocabulary):
     return set(word[:len(word)//2] for word in vocabulary)
 
 
+def linear_search(vocabulary):
+    for word in vocabulary:
+        
+
 def autocomplete_setup(vocabulary, algorithm='linear_search'):
     """Return the main data structure needed to set up autocomplete using the
     given vocabulary and algorithm, specified as linear_search, trie, etc."""
