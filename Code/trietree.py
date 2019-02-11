@@ -69,7 +69,17 @@ class TrieTree(object):
 
     def delete(self, word):
         '''Delete the node from the tree'''
+        # Dont want to use search function because it would return a copy of the node we need to alter the nodes in place
 
-        # So what do we have to note when we delete from a trie tree
+        # First check if word is contained inside trie tree
+        if self.find(word) is False:
+            raise ValueError("Can't delete a word that does not exist")
 
-        #
+#  # Search for different keys
+    # output = ["Not present in trie","Present in trie"]
+
+
+#     print("{} ---- {}".format("the",output[t.search("the")]))
+#     print("{} ---- {}".format("these",output[t.search("these")]))
+#     print("{} ---- {}".format("their",output[t.search("their")]))
+#     print("{} ---- {}".format("thaw",output[t.search("thaw")]))
