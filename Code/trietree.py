@@ -19,25 +19,20 @@ class TrieTree(object):
     def find(self, word):
         # Find a node in the given trie tree given the name of the word
         root_node = self.root
-
+        concat = ""
         for index in range(0, len(word)):
 
             current_letter = word[index]
-            current_node = TrieTrieeNode(current_letter)
-            # print(root_node.references)
-            # print("")
+            concat += current_letter
             position = self.__alphabet_index_helper(current_letter)
 
-            # print(root_node.data,root_node.references, root_node.references[position].data)
-
-            # If at the position there is no value meaning that there is no more pathway
             if root_node.references[position] is None:
-                print("FOUND NO MORE PATHWAY", current_letter)
                 return False
-            # print(current_node.references)
+
             root_node = root_node.references[position]
 
-        if root_node.flag == False:  # If it was a search miss meaning we found it but the flag wasn't marked
+        print(concat, root_node.data, root_node.flag)
+        if root_node.flag == False:
             return False
         return True
 
@@ -49,30 +44,32 @@ class TrieTree(object):
     def insert(self, word):
         # Insert a given word into the Trie Tree
 
-        # Whats auto updating our root node
-
-        # Why do we we need recursion because cant we update every iteration the node to be the previous node
-
-        # Would we lose the root node if we change the value ... not if we store it
-
         root_node = self.root
+        concat = ""
 
         for index in range(0, len(word)):
             # Getting each letter in the word
             current_letter = word[index]
             current_node = TrieTrieeNode(current_letter)
+            concat += current_letter
 
-            # What if a pathway already exists?
+            # What if a pathway already exists? Dont want to overwrite it becasue a flag there might be set
             position = self.__alphabet_index_helper(current_letter)
-            root_node.references[position] = current_node
-            # print(root_node.data,root_node.references, current_node.data)
+
+            if root_node.references[position] is None:
+
+                root_node.references[position] = current_node
 
             root_node = root_node.references[position]  # Go one level deeper
-            # print("")
 
         root_node.flag = True  # To mark that the end of sequence occured here
-        return root_node  # Stub
+
+    def find_parent_reference(self, node):
+        '''Find the Parent Node of the given word in the trie'''
 
     def delete(self, word):
-        # Delete a given node from the Trie Tree
-        pass
+        '''Delete the node from the tree'''
+
+        # So what do we have to note when we delete from a trie tree
+
+        #
