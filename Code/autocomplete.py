@@ -13,6 +13,7 @@ def get_lines(filename='/usr/share/dict/words'):
     # Open file and remove whitespace from each line
     with open(filename) as file:
         lines = [line.strip() for line in file]
+    print(lines) 
     return lines
 
 
@@ -21,9 +22,6 @@ def generate_prefixes(vocabulary):
     # Generate prefixes using the first half of each string
     return set(word[:len(word)//2] for word in vocabulary)
 
-
-def linear_search(vocabulary):
-    for word in vocabulary:
 
 
 def autocomplete_setup(vocabulary, algorithm='linear_search'):
@@ -37,7 +35,7 @@ def autocomplete_setup(vocabulary, algorithm='linear_search'):
         return TrieTree(vocabulary)
 
 
-def autocomplete(prefix, structure, algorithm='linear_search'):
+def autocomplete(prefix, structure, algorithm='trie'):
     """Return all vocabulary entries that start with the given prefix using the
     given structure and algorithm, specified as linear_search, trie, etc."""
     if algorithm == 'linear_search':
@@ -45,7 +43,7 @@ def autocomplete(prefix, structure, algorithm='linear_search'):
         return [word for word in structure if word.startswith(prefix)]
     elif algorithm == 'trie':
         # Search the trie structure for the prefix
-        return structure.search(prefix)
+        return structure.recursiveWalk(prefix)
 
 
 def main():
