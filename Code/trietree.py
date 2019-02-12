@@ -46,9 +46,10 @@ class TrieTree(object):
         return root_node
 
     def __alphabet_index_helper(self, letter):
+        # BREAKS WITH APOSTROPHES
         alphabet = "abcdefghijklmnopqrstuvwxyz"
-
-        return alphabet.index(letter)
+        
+        return alphabet.index(letter.lower())
 
     def insert(self, word):
         # Insert a given word into the Trie Tree
