@@ -107,8 +107,9 @@ class BinaryMinHeap(object):
 
         if item < parent_item:  # Meaning that value should lie above since it is smaller
             self.items[parent_index], self.items[index] = self.items[index], parent_item
-        # Recursively bubble up again if necessary
-        self._bubble_up(parent_index) # Pass in the updated parent node after swapping has occured 
+
+            # Recursively bubble up again if necessary
+            self._bubble_up(parent_index) # Pass in the updated parent node after swapping has occured 
 
     def _bubble_down(self, index):
         """Ensure the heap ordering property is true below the given index,
@@ -118,33 +119,32 @@ class BinaryMinHeap(object):
         out of order. Maximum path length in complete binary tree is log n."""
         if not (0 <= index <= self._last_index()):
             raise IndexError('Invalid index: {}'.format(index))
+
         # Get the index of the item's left and right children
         left_index = self._left_child_index(index)
         right_index = self._right_child_index(index)
 
+        # Initially set resulting index to be the left index because left child will exist
+        resulting_index = left_index
+        # print("Left Index %s Right Index %s", left_index, right_index)
+        
+        # Base case always first
         if left_index > self._last_index(): # What is the meaning of this base case?
             return  # This index is a leaf node (does not have any children)
 
         # Get the item's value
         item = self.items[index]
-        left_item, right_item = self.items[left_index], self.items[right_index]
 
-        # Determine which child item to compare this node's item to
-        if (item >= left_item):
-            # Swap this item with a child item if values are out of order
-            self.items[index], self.items[left_index] = left_item, self.items[index]
-            child = left_index
+        # Only update to be right if item at the right index is smaller and the right index actually exists
+        if right_index < len(self.items) and self.items[right_index] <= self.items[left_index]:
+            resulting_index = right_index
 
-        elif item >= right_item:
+        # Right now only comparing left and right have to see if parent is even bigger
+        if item > self.items[resulting_index]:
 
-            # Swap this item with a child item if values are out of order
-            self.items[index], self.items[right_index] = right_item = self.items[index]
-            child_index = right_index
+            self.items[index], self.items[resulting_index] = self.items[resulting_index], self.items[index]
+            self._bubble_down(resulting_index) # Only make the recursive call if the smaller item is actually smaller than the parent item
 
-        
-        child_item = self.items[child_index]
-
-        self
 
     def _last_index(self):
         """Return the last valid index in the underlying array of items."""
@@ -188,6 +188,7 @@ def test_binary_min_heap():
         print('delete_min: {}'.format(heap_min))
         print('heap: {}'.format(heap))
         print('size: {}'.format(heap.size()))
+        print("")
 
 
 if __name__ == '__main__':
