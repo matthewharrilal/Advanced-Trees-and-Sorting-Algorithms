@@ -21,9 +21,7 @@ class BinaryMinHeap(object):
 
     def is_empty(self):
         """Return True if this heap is empty, or False otherwise."""
-        # TODO: Check if empty based on how many items are in the list
-        # ...
-
+        # Check if empty based on how many items are in the list
         if self.size == 0:
             return True
         return False
@@ -86,22 +84,31 @@ class BinaryMinHeap(object):
     def _bubble_up(self, index):
         """Ensure the heap ordering property is true above the given index,
         swapping out of order items, or until the root node is reached.
+
         Best case running time: O(1) if parent item is smaller than this item.
         Worst case running time: O(log n) if items on path up to root node are
         out of order. Maximum path length in complete binary tree is log n."""
+
         if index == 0:
             return  # This index is the root node (does not have a parent)
         if not (0 <= index <= self._last_index()):
             raise IndexError('Invalid index: {}'.format(index))
+
         # Get the item's value
         item = self.items[index]
         # Get the parent's index and value
         parent_index = self._parent_index(index)
         parent_item = self.items[parent_index]
-        # TODO: Swap this item with parent item if values are out of order
-        # ...
-        # TODO: Recursively bubble up again if necessary
-        # ...
+        
+        # Swap this item with parent item if values are out of order
+
+        if parent_item is None:
+            return  # Meaning that you are at the root node
+
+        if item < parent_item:  # Meaning that value should lie above since it is smaller
+            self.items[parent_index], self.items[index] = self.items[index], parent_item
+        # Recursively bubble up again if necessary
+        self._bubble_up(self.items[parent_index]) # Pass in the updated parent node after swapping has occured 
 
     def _bubble_down(self, index):
         """Ensure the heap ordering property is true below the given index,
