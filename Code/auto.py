@@ -9,7 +9,7 @@ def autocomplete_setup(vocabulary):
 
 def autocomplete(vocabulary):
 
-    return autocomplete_setup(vocabulary).recursiveWalk("a")
+    return autocomplete_setup(vocabulary).recursiveWalk("ca")
 
 
 if __name__ == '__main__':

@@ -24,6 +24,10 @@ class BinaryMinHeap(object):
         # TODO: Check if empty based on how many items are in the list
         # ...
 
+        if self.size == 0:
+            return True
+        return False
+
     def size(self):
         """Return the number of items in this heap."""
         return len(self.items)

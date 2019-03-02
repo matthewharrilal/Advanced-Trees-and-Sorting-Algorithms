@@ -23,11 +23,9 @@ class TrieTree(object):
     def search(self, word):
         # Find a node in the given trie tree given the name of the word
         root_node = self.root
-        concat = ""
         for index in range(0, len(word)):
 
             current_letter = word[index]
-            concat += current_letter
             position = self.__alphabet_index_helper(current_letter)
 
             if root_node.references[position] is None:
@@ -45,23 +43,22 @@ class TrieTree(object):
 
         return root_node
 
+    # ASCII CODE REFACTOR
     def __alphabet_index_helper(self, letter):
         # BREAKS WITH APOSTROPHES
         alphabet = "abcdefghijklmnopqrstuvwxyz"
-        
+        print(letter)
         return alphabet.index(letter.lower())
 
     def insert(self, word):
         # Insert a given word into the Trie Tree
 
         root_node = self.root
-        concat = ""
 
         for index in range(0, len(word)):
             # Getting each letter in the word
             current_letter = word[index]
             current_node = TrieTrieeNode(current_letter)
-            concat += current_letter
 
             # What if a pathway already exists? Dont want to overwrite it becasue a flag there might be set
             position = self.__alphabet_index_helper(current_letter)
